@@ -1,14 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
 import {
-  ArrowDown,
-  ArrowLeft,
-  ArrowRight,
   ArrowUpRight,
   Check,
-  GameController,
   List,
-  Pause,
   Play,
   Star,
   X,
@@ -29,15 +23,15 @@ const partners = [
 const experiences = [
   {
     eyebrow: '01 / ALL PLAY, ALL NIGHT',
-    title: 'Gaming events',
-    description: 'A room full of screens, friendly competition, and enough games for everyone to find their next favorite.',
+    title: 'Gaming event',
+    description: 'Full-scale multiplayer setups, consoles and giant screens for any crowd.',
     detail: 'Multiplayer setups · Giant screens · Every skill level',
     image: '/images/gaming-event.jpg',
     imageAlt: 'Guests playing multiplayer games on large screens at a Next Level Gaming event',
   },
   {
     eyebrow: '02 / TAKE THE STAGE',
-    title: 'Esports tournaments',
+    title: 'Esports tournament',
     description: 'Turn the games everyone loves into a shared moment, with big-screen matches and a crowd behind every play.',
     detail: 'Tournament production · Live play · Event crew',
     image: '/images/esports-event.jpeg',
@@ -45,7 +39,7 @@ const experiences = [
   },
   {
     eyebrow: '03 / MAKE IT YOURS',
-    title: 'Movie & social nights',
+    title: 'Outdoor movie night',
     description: 'Bring people together around a giant screen, a custom event, and all the small details that make it yours.',
     detail: 'Outdoor cinema · Trivia · Social games',
     image: '/images/interactive-event.jpg',
@@ -54,9 +48,9 @@ const experiences = [
 ];
 
 const testimonials = [
-  'Amazing experience from setup to the event itself. Everything felt professional and engaging.',
-  'Amazing experience from setup to the event itself. Everything felt professional and engaging.',
-  'Amazing experience from setup to the event itself. Everything felt professional and engaging.',
+  'Add a client testimonial here.',
+  'Add a client testimonial here.',
+  'Add a client testimonial here.',
 ];
 
 function useReveal() {
@@ -92,25 +86,14 @@ function Brand({ footer = false }) {
 }
 
 function LogoMarquee() {
-  const [paused, setPaused] = useState(false);
   const repeatedPartners = [...partners, ...partners];
 
   return (
     <section className="partners" aria-labelledby="partners-title">
       <div className="partners-heading wrap">
-        <p className="eyebrow" id="partners-title">Trusted collaborators</p>
-        <button
-          className="marquee-control"
-          type="button"
-          aria-label={paused ? 'Resume moving partner logos' : 'Pause moving partner logos'}
-          aria-pressed={paused}
-          onClick={() => setPaused((value) => !value)}
-        >
-          {paused ? <Play size={13} weight="fill" /> : <Pause size={13} weight="fill" />}
-          <span>{paused ? 'Play' : 'Pause'}</span>
-        </button>
+        <p className="eyebrow" id="partners-title">Trusted collaborations</p>
       </div>
-      <div className={`marquee${paused ? ' marquee--paused' : ''}`}>
+      <div className="marquee">
         <div className="marquee-track">
           {repeatedPartners.map((partner, index) => (
             <div className="partner-mark" key={`${partner.name}-${index}`} aria-hidden={index >= partners.length}>
@@ -141,14 +124,13 @@ function Header({ onQuote }) {
           {menuOpen ? <X size={21} /> : <List size={21} />}
         </button>
         <nav className={`primary-nav${menuOpen ? ' primary-nav--open' : ''}`} aria-label="Main navigation">
-          <a href="#experiences" onClick={closeMenu}>Events</a>
+          <a href="#division" onClick={closeMenu}>Events</a>
           <a href="#experiences" onClick={closeMenu}>Experiences</a>
           <a href="https://www.nextlevelgamingevents.com/art" target="_blank" rel="noreferrer" onClick={closeMenu}>Novelties</a>
           <a href="#about" onClick={closeMenu}>About</a>
           <a href="#contact" onClick={closeMenu}>Contact</a>
         </nav>
         <div className="header-actions">
-          <span className="booking-status"><i />Booking open</span>
           <button className="button button--primary button--small" onClick={onQuote} type="button">
             Get a quote <ArrowUpRight size={14} weight="bold" />
           </button>
@@ -229,16 +211,13 @@ function Hero({ onQuote }) {
     <section className="hero" id="home" aria-labelledby="hero-title">
       <div className="hero-content wrap">
         <div className="hero-copy">
-          <p className="hero-kicker"><span className="kicker-line" />Gaming, entertainment &amp; interactive events</p>
-          <h1 id="hero-title">Take your event<br />to the <span>next level.</span></h1>
-          <p className="hero-description">Big-screen gaming and unforgettable event experiences, built around the people in the room.</p>
+          <h1 id="hero-title">Take your event<br />to the next level.</h1>
+          <p className="hero-description">Gaming, entertainment, and interactive experiences for unforgettable events.</p>
           <div className="hero-actions">
             <button className="button button--primary" onClick={onQuote} type="button">Plan your event <ArrowUpRight size={16} weight="bold" /></button>
-            <a className="button button--outline" href="#experiences">Explore experiences <ArrowRight size={15} /></a>
+            <a className="button button--outline" href="#division">Explore explanation <ArrowUpRight size={15} /></a>
           </div>
         </div>
-        <a className="hero-scroll" href="#partners" aria-label="Scroll to trusted collaborators"><span>SCROLL TO EXPLORE</span><ArrowDown size={14} /></a>
-        <span className="hero-index" aria-hidden="true">01 <i /> 06</span>
       </div>
     </section>
   );
@@ -246,79 +225,45 @@ function Hero({ onQuote }) {
 
 function ExperienceSection() {
   const [active, setActive] = useState(0);
-  const experience = experiences[active];
   const setIndex = (index) => setActive((index + experiences.length) % experiences.length);
   const previous = () => setIndex(active - 1);
   const next = () => setIndex(active + 1);
+  const prevIndex = (active + experiences.length - 1) % experiences.length;
+  const nextIndex = (active + 1) % experiences.length;
+  let pointerStart = null;
 
   return (
     <section className="experiences section-pad" id="experiences" aria-labelledby="experiences-title">
       <div className="wrap">
-        <div className="section-topline" data-reveal>
-          <p className="eyebrow">Your event. Your rules.</p>
-          <span className="section-counter">01 — 03</span>
-        </div>
-        <div className="section-heading-row" data-reveal>
-          <h2 className="section-title" id="experiences-title">Choose your<br className="mobile-break" /> <span>experience.</span></h2>
-          <p className="section-intro">Bring the room together with the kind of event people talk about on the way home.</p>
-        </div>
-        <div className="experience-stage" data-reveal id="experience-panel" role="tabpanel" aria-label={`${experience.title} details`}>
-          <div className="experience-image-wrap">
-            <img key={experience.image} className="experience-image" src={experience.image} alt={experience.imageAlt} />
-            <div className="image-shade" />
-            <p className="image-label"><span />Real events, real reactions</p>
-            <p className="image-number">N° 0{active + 1}</p>
-          </div>
-          <div className="experience-copy" aria-live="polite">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.28, ease: 'easeOut' }}
+        <h2 className="experience-heading" id="experiences-title" data-reveal>Choose your experience</h2>
+        <div
+          className="experience-carousel"
+          aria-roledescription="carousel"
+          aria-label="Event experiences"
+          onKeyDown={(event) => { if (event.key === 'ArrowLeft') previous(); if (event.key === 'ArrowRight') next(); }}
+          onPointerDown={(event) => { pointerStart = event.clientX; }}
+          onPointerUp={(event) => { if (pointerStart !== null && Math.abs(event.clientX - pointerStart) > 45) { event.clientX < pointerStart ? next() : previous(); } pointerStart = null; }}
+          tabIndex="0"
+        >
+          {[prevIndex, active, nextIndex].map((index, position) => {
+            const item = experiences[index];
+            return (
+              <button
+                key={item.title}
+                className={`experience-card experience-card--${position === 1 ? 'active' : position === 0 ? 'previous' : 'next'}`}
+                type="button"
+                aria-label={`Show ${item.title}`}
+                aria-current={position === 1 ? 'true' : undefined}
+                onClick={() => position !== 1 && setIndex(index)}
+                tabIndex={position === 1 ? -1 : 0}
               >
-                <p className="eyebrow experience-eyebrow">{experience.eyebrow}</p>
-                <h3>{experience.title}</h3>
-                <p className="experience-description">{experience.description}</p>
-                <p className="experience-detail">{experience.detail}</p>
-                <a className="text-link" href="#contact">Explore this experience <ArrowUpRight size={16} /></a>
-              </motion.div>
-            </AnimatePresence>
-            <div className="slider-controls">
-              <div className="slider-dots" role="group" aria-label="Choose an event experience">
-                {experiences.map((item, index) => (
-                  <button
-                    key={item.title}
-                    type="button"
-                    aria-label={`Show ${item.title}`}
-                    aria-current={active === index ? 'true' : undefined}
-                    className={`slider-dot${active === index ? ' slider-dot--active' : ''}`}
-                    onClick={() => setIndex(index)}
-                  />
-                ))}
-              </div>
-              <div className="slider-arrows">
-                <button type="button" onClick={previous} aria-label="Previous experience"><ArrowLeft size={17} /></button>
-                <button type="button" onClick={next} aria-label="Next experience"><ArrowRight size={17} /></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="experience-tab-list" role="tablist" aria-label="Event experiences">
-          {experiences.map((item, index) => (
-            <button
-              key={item.title}
-              type="button"
-              role="tab"
-              aria-selected={active === index}
-              aria-controls="experience-panel"
-              className={`experience-tab${active === index ? ' experience-tab--active' : ''}`}
-              onClick={() => setIndex(index)}
-            >
-              <span>0{index + 1}</span>{item.title}<ArrowUpRight size={15} />
-            </button>
-          ))}
+                <img src={item.image} alt={position === 1 ? item.imageAlt : ''} aria-hidden={position !== 1} />
+                <span className="experience-card-shade" />
+                {position === 1 && <span className="experience-card-caption"><strong>{item.title.split(' ')[0]} <i>{item.title.split(' ').slice(1).join(' ')}</i></strong><small>{item.description}</small></span>}
+              </button>
+            );
+          })}
+          <span className="experience-count" aria-live="polite">0{active + 1} <i /> 0{experiences.length}</span>
         </div>
       </div>
     </section>
@@ -327,13 +272,10 @@ function ExperienceSection() {
 
 function DivisionSection() {
   return (
-    <section className="division section-pad" id="gaming" aria-labelledby="division-title">
+    <section className="division section-pad" id="division" aria-labelledby="division-title">
       <div className="wrap division-grid">
         <FadeContent blur={false} duration={0.8} delay={0.08}>
-          <div className="division-image-frame">
-            <img src="/images/esports-event.jpeg" alt="Players and spectators gathered around a tournament screen" loading="lazy" />
-            <span className="photo-caption">THE GAMING DIVISION <i /> BUILT FOR THE WHOLE ROOM</span>
-          </div>
+          <div className="division-image-frame photo-placeholder" role="img" aria-label="Gaming event photo placeholder"><span>Gaming event photo</span></div>
         </FadeContent>
         <div className="division-copy" data-reveal>
           <p className="eyebrow"><span className="eyebrow-rule" /> The gaming division</p>
@@ -347,34 +289,27 @@ function DivisionSection() {
 }
 
 function TestimonialSection() {
-  const [paused, setPaused] = useState(false);
-  const cards = useMemo(() => [...testimonials, ...testimonials], []);
+  const cards = [...testimonials, ...testimonials];
 
   return (
     <section className="testimonials section-pad" aria-labelledby="testimonials-title">
       <div className="wrap testimonial-heading" data-reveal>
-        <p className="eyebrow">Good nights get talked about</p>
         <h2 className="section-title" id="testimonials-title">What our clients <span>say.</span></h2>
         <p className="section-intro">Feedback from event organizers who trusted us with their crowd.</p>
       </div>
-      <div className={`testimonial-marquee${paused ? ' testimonial-marquee--paused' : ''}`}>
-        <div className="testimonial-track">
-          {cards.map((quote, index) => (
-            <article className="testimonial-card" key={`${index}-${quote}`} aria-hidden={index >= testimonials.length}>
-              <div className="testimonial-stars" aria-label="Five stars">{Array.from({ length: 5 }, (_, star) => <Star key={star} size={16} weight="fill" />)}</div>
-              <blockquote>“{quote}”</blockquote>
-              <span className="testimonial-mark"><GameController size={21} weight="duotone" /></span>
-            </article>
-          ))}
+      {[0, 1].map((row) => (
+        <div className="testimonial-marquee" key={row}>
+          <div className={`testimonial-track${row ? ' testimonial-track--reverse' : ''}`}>
+            {cards.map((quote, index) => (
+              <article className="testimonial-card" key={`${row}-${index}`} aria-hidden={index >= testimonials.length}>
+                <div className="testimonial-stars" aria-hidden="true">{Array.from({ length: 5 }, (_, star) => <Star key={star} size={16} weight="fill" />)}</div>
+                <blockquote>{quote}</blockquote>
+                <span className="testimonial-mark" aria-hidden="true"><Play size={16} weight="fill" /></span>
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="wrap testimonial-controls">
-        <span>GOOD TIMES, ON REPEAT</span>
-        <button className="marquee-control" type="button" aria-pressed={paused} onClick={() => setPaused((value) => !value)}>
-          {paused ? <Play size={13} weight="fill" /> : <Pause size={13} weight="fill" />}
-          <span>{paused ? 'Play stories' : 'Pause stories'}</span>
-        </button>
-      </div>
+      ))}
     </section>
   );
 }
@@ -387,13 +322,10 @@ function AboutSection() {
           <p className="eyebrow">Who we are</p>
           <h2>More than gaming.<br />It’s an <span>experience.</span></h2>
           <p>For over a decade, we’ve turned get-togethers into shared stories—from giant outdoor screens to esports stages. Every event is planned, staffed, and run by our own crew.</p>
-          <a className="button button--outline" href="https://www.nextlevelgamingevents.com/" target="_blank" rel="noreferrer">Get to know us <ArrowUpRight size={15} /></a>
+          <a className="button button--outline" href="https://www.nextlevelgamingevents.com/" target="_blank" rel="noreferrer">Learn more <ArrowUpRight size={15} /></a>
         </div>
         <FadeContent blur={false} duration={0.9} delay={0.12}>
-          <figure className="about-image-frame">
-            <img src="/images/interactive-event.jpg" alt="A crowd sharing a lively event moment" loading="lazy" />
-            <figcaption><span>10+</span> YEARS MAKING MOMENTS</figcaption>
-          </figure>
+          <figure className="about-image-frame photo-placeholder" role="img" aria-label="Event photo placeholder"><figcaption>About us photo</figcaption></figure>
         </FadeContent>
       </div>
     </section>
@@ -403,10 +335,9 @@ function AboutSection() {
 function ClosingCta({ onQuote }) {
   return (
     <section className="closing-cta" aria-labelledby="cta-title">
-      <div className="cta-photo" aria-hidden="true" />
+      <div className="cta-photo photo-placeholder" aria-hidden="true"><span>Event photo</span></div>
       <div className="closing-cta-inner wrap" data-reveal>
-        <p className="eyebrow">The next great event starts here</p>
-        <h2 id="cta-title">Ready to level up<br />your <span>event?</span></h2>
+        <h2 id="cta-title">Ready to <span>level up</span><br />your event?</h2>
         <button className="button button--primary" onClick={onQuote} type="button">Build your event <ArrowUpRight size={17} weight="bold" /></button>
       </div>
       <div className="cta-frame" aria-hidden="true" />
@@ -429,13 +360,13 @@ function Footer({ onQuote }) {
             </div>
           </div>
           <div className="footer-navs">
-            <div><p>Events</p><a href="#experiences">Gaming events</a><a href="#experiences">Esports</a><a href="#experiences">Movie nights</a></div>
-            <div><p>Experiences</p><a href="#experiences">Virtual reality</a><a href="#experiences">Social games</a><a href="https://www.nextlevelgamingevents.com/art" target="_blank" rel="noreferrer">Novelties</a></div>
-            <div><p>Company</p><a href="#about">About</a><a href="https://www.nextlevelgamingevents.com/" target="_blank" rel="noreferrer">Our story</a><a href="mailto:sales@nextlevelgamingevents.com">Contact</a></div>
+            <div><p>Events</p><a href="#division">Gaming events</a><a href="#experiences">Movie nights</a><a href="#experiences">Trivia nights</a></div>
+            <div><p>Experience</p><a href="#experiences">360 booth</a><a href="#experiences">Virtual reality</a><a href="#experiences">Just dance</a><a href="#experiences">Silent disco</a><a href="#experiences">Sim racing</a></div>
+            <div><p>Company</p><a href="#about">About</a><a href="https://www.nextlevelgamingevents.com/art" target="_blank" rel="noreferrer">Novelties</a><a href="#contact">FAQ</a><a href="mailto:sales@nextlevelgamingevents.com">Contact</a></div>
           </div>
         </div>
         <div className="footer-wordmark" aria-label="Next Level">NEXT<span>LEVEL</span></div>
-        <div className="footer-bottom"><span className="footer-symbol">///</span><span>Next Level Gaming Events</span><span className="footer-line" /><span>© {new Date().getFullYear()} Next Level Gaming Events</span><a href="#home">Back to top <ArrowUpRight size={12} /></a></div>
+        <div className="footer-bottom"><span className="footer-symbol">///</span><span>Next Level Gaming Events</span><span className="footer-line" /><span>© {new Date().getFullYear()} Next Level Gaming Events</span></div>
       </div>
     </footer>
   );
