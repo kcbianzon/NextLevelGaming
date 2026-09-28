@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import {
   ArrowDown,
   ArrowLeft,
@@ -269,11 +270,21 @@ function ExperienceSection() {
             <p className="image-number">N° 0{active + 1}</p>
           </div>
           <div className="experience-copy" aria-live="polite">
-            <p className="eyebrow experience-eyebrow">{experience.eyebrow}</p>
-            <h3>{experience.title}</h3>
-            <p className="experience-description">{experience.description}</p>
-            <p className="experience-detail">{experience.detail}</p>
-            <a className="text-link" href="#contact">Explore this experience <ArrowUpRight size={16} /></a>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.28, ease: 'easeOut' }}
+              >
+                <p className="eyebrow experience-eyebrow">{experience.eyebrow}</p>
+                <h3>{experience.title}</h3>
+                <p className="experience-description">{experience.description}</p>
+                <p className="experience-detail">{experience.detail}</p>
+                <a className="text-link" href="#contact">Explore this experience <ArrowUpRight size={16} /></a>
+              </motion.div>
+            </AnimatePresence>
             <div className="slider-controls">
               <div className="slider-dots" role="group" aria-label="Choose an event experience">
                 {experiences.map((item, index) => (
