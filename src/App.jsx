@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import {
+  ArrowRight,
   ArrowUpRight,
   Check,
   List,
-  Play,
   Star,
   X,
 } from '@phosphor-icons/react';
 import FadeContent from './components/FadeContent';
+import ControllerParticles from './components/ControllerParticles';
+import StarBorder from './components/StarBorder';
 
 const partners = [
   { name: 'Harvard University', image: '/images/partners/harvard.png' },
@@ -48,9 +50,22 @@ const experiences = [
 ];
 
 const testimonials = [
-  'Add a client testimonial here.',
-  'Add a client testimonial here.',
-  'Add a client testimonial here.',
+  {
+    quote: 'Our students were completely engaged from the first game to the last. The crew made the whole night easy.',
+    name: 'Campus event organizer',
+  },
+  {
+    quote: 'The setup looked incredible, and the team kept everything running smoothly all evening.',
+    name: 'Community event planner',
+  },
+  {
+    quote: 'They brought the energy and equipment that made this an event people still talk about.',
+    name: 'Event coordinator',
+  },
+  {
+    quote: 'Professional, responsive, and great with our guests. We’re already planning the next one.',
+    name: 'Organization host',
+  },
 ];
 
 function useReveal() {
@@ -131,9 +146,9 @@ function Header({ onQuote }) {
           <a href="#contact" onClick={closeMenu}>Contact</a>
         </nav>
         <div className="header-actions">
-          <button className="button button--primary button--small" onClick={onQuote} type="button">
+          <StarBorder className="button button--primary button--small" onClick={onQuote} type="button">
             Get a quote <ArrowUpRight size={14} weight="bold" />
-          </button>
+          </StarBorder>
         </div>
       </div>
     </header>
@@ -197,7 +212,7 @@ function QuoteDialog({ open, onClose }) {
               <label>Event date<input name="date" type="date" /></label>
             </div>
             <label>Tell us a little about it<textarea name="message" rows="3" placeholder="Where, when, and what are you dreaming up?" required /></label>
-            <button className="button button--primary form-submit" type="submit">Build my event <ArrowUpRight size={16} weight="bold" /></button>
+            <StarBorder className="button button--primary form-submit" type="submit">Build my event <ArrowUpRight size={16} weight="bold" /></StarBorder>
             <p className="form-note">This opens a pre-filled email in your email app. No information is sent from this page.</p>
           </form>
         )}
@@ -210,11 +225,12 @@ function Hero({ onQuote }) {
   return (
     <section className="hero" id="home" aria-labelledby="hero-title">
       <div className="hero-content wrap">
+        <ControllerParticles />
         <div className="hero-copy">
           <h1 id="hero-title">Take your event<br />to the next level.</h1>
           <p className="hero-description">Gaming, entertainment, and interactive experiences for unforgettable events.</p>
           <div className="hero-actions">
-            <button className="button button--primary" onClick={onQuote} type="button">Plan your event <ArrowUpRight size={16} weight="bold" /></button>
+            <StarBorder className="button button--primary" onClick={onQuote} type="button">Plan your event <ArrowUpRight size={16} weight="bold" /></StarBorder>
             <a className="button button--outline" href="#division">Explore explanation <ArrowUpRight size={15} /></a>
           </div>
         </div>
@@ -225,12 +241,20 @@ function Hero({ onQuote }) {
 
 function ExperienceSection() {
   const [active, setActive] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const setIndex = (index) => setActive((index + experiences.length) % experiences.length);
   const previous = () => setIndex(active - 1);
   const next = () => setIndex(active + 1);
   const prevIndex = (active + experiences.length - 1) % experiences.length;
   const nextIndex = (active + 1) % experiences.length;
-  let pointerStart = null;
+  const pointerStart = useRef(null);
+  const didSwipe = useRef(false);
+
+  useEffect(() => {
+    if (isPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const timer = window.setInterval(() => setActive((index) => (index + 1) % experiences.length), 4800);
+    return () => window.clearInterval(timer);
+  }, [isPaused]);
 
   return (
     <section className="experiences section-pad" id="experiences" aria-labelledby="experiences-title">
@@ -241,8 +265,12 @@ function ExperienceSection() {
           aria-roledescription="carousel"
           aria-label="Event experiences"
           onKeyDown={(event) => { if (event.key === 'ArrowLeft') previous(); if (event.key === 'ArrowRight') next(); }}
-          onPointerDown={(event) => { pointerStart = event.clientX; }}
-          onPointerUp={(event) => { if (pointerStart !== null && Math.abs(event.clientX - pointerStart) > 45) { event.clientX < pointerStart ? next() : previous(); } pointerStart = null; }}
+          onPointerEnter={() => setIsPaused(true)}
+          onPointerLeave={() => setIsPaused(false)}
+          onFocus={() => setIsPaused(true)}
+          onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false); }}
+          onPointerDown={(event) => { pointerStart.current = event.clientX; didSwipe.current = false; setIsPaused(true); }}
+          onPointerUp={(event) => { if (pointerStart.current !== null && Math.abs(event.clientX - pointerStart.current) > 45) { didSwipe.current = true; event.clientX < pointerStart.current ? next() : previous(); } pointerStart.current = null; }}
           tabIndex="0"
         >
           {[prevIndex, active, nextIndex].map((index, position) => {
@@ -254,7 +282,7 @@ function ExperienceSection() {
                 type="button"
                 aria-label={`Show ${item.title}`}
                 aria-current={position === 1 ? 'true' : undefined}
-                onClick={() => position !== 1 && setIndex(index)}
+                onClick={() => { if (didSwipe.current) didSwipe.current = false; else if (position !== 1) setIndex(index); }}
                 tabIndex={position === 1 ? -1 : 0}
               >
                 <img src={item.image} alt={position === 1 ? item.imageAlt : ''} aria-hidden={position !== 1} />
@@ -289,8 +317,6 @@ function DivisionSection() {
 }
 
 function TestimonialSection() {
-  const cards = [...testimonials, ...testimonials];
-
   return (
     <section className="testimonials section-pad" aria-labelledby="testimonials-title">
       <div className="wrap testimonial-heading" data-reveal>
@@ -300,12 +326,16 @@ function TestimonialSection() {
       {[0, 1].map((row) => (
         <div className="testimonial-marquee" key={row}>
           <div className={`testimonial-track${row ? ' testimonial-track--reverse' : ''}`}>
-            {cards.map((quote, index) => (
-              <article className="testimonial-card" key={`${row}-${index}`} aria-hidden={index >= testimonials.length}>
-                <div className="testimonial-stars" aria-hidden="true">{Array.from({ length: 5 }, (_, star) => <Star key={star} size={16} weight="fill" />)}</div>
-                <blockquote>{quote}</blockquote>
-                <span className="testimonial-mark" aria-hidden="true"><Play size={16} weight="fill" /></span>
-              </article>
+            {[0, 1].map((copy) => (
+              <div className="testimonial-group" key={copy} aria-hidden={copy === 1}>
+                {testimonials.map((review, index) => (
+                  <article className="testimonial-card" key={`${row}-${copy}-${index}`}>
+                    <div className="testimonial-stars" aria-label="5 out of 5 stars">{Array.from({ length: 5 }, (_, star) => <Star key={star} size={16} weight="fill" />)}</div>
+                    <blockquote>“{review.quote}”</blockquote>
+                    <span className="testimonial-author">— {review.name}</span>
+                  </article>
+                ))}
+              </div>
             ))}
           </div>
         </div>
@@ -335,10 +365,10 @@ function AboutSection() {
 function ClosingCta({ onQuote }) {
   return (
     <section className="closing-cta" aria-labelledby="cta-title">
-      <div className="cta-photo photo-placeholder" aria-hidden="true"><span>Event photo</span></div>
+      <div className="cta-photo" aria-hidden="true" />
       <div className="closing-cta-inner wrap" data-reveal>
         <h2 id="cta-title">Ready to <span>level up</span><br />your event?</h2>
-        <button className="button button--primary" onClick={onQuote} type="button">Build your event <ArrowUpRight size={17} weight="bold" /></button>
+        <StarBorder className="button button--primary" onClick={onQuote} type="button">Build your event <ArrowUpRight size={17} weight="bold" /></StarBorder>
       </div>
       <div className="cta-frame" aria-hidden="true" />
     </section>
@@ -355,7 +385,7 @@ function Footer({ onQuote }) {
             <p className="eyebrow">Ready to level up your event?</p>
             <a className="footer-email" href="mailto:sales@nextlevelgamingevents.com">sales@nextlevelgamingevents.com <ArrowUpRight size={19} /></a>
             <div className="footer-action-row">
-              <button className="button button--primary" type="button" onClick={onQuote}>Get a quote <ArrowRight size={15} /></button>
+              <StarBorder className="button button--primary" type="button" onClick={onQuote}>Get a quote <ArrowRight size={15} /></StarBorder>
               <span><i /> Let’s make it a night to remember</span>
             </div>
           </div>

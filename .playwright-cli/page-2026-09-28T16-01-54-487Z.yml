@@ -1,0 +1,183 @@
+- generic [ref=f3e2]:
+  - link "Skip to content" [ref=f3e3] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f3e4]:
+    - generic [ref=f3e5]:
+      - link "Next Level Gaming Events, home" [ref=f3e6] [cursor=pointer]:
+        - /url: "#home"
+        - img "Next Level Gaming and Novelties" [ref=f3e7]
+      - navigation "Main navigation" [ref=f3e8]:
+        - link "Events" [ref=f3e9] [cursor=pointer]:
+          - /url: "#division"
+        - link "Experiences" [ref=f3e10] [cursor=pointer]:
+          - /url: "#experiences"
+        - link "Novelties" [ref=f3e11] [cursor=pointer]:
+          - /url: https://www.nextlevelgamingevents.com/art
+        - link "About" [ref=f3e12] [cursor=pointer]:
+          - /url: "#about"
+        - link "Contact" [ref=f3e13] [cursor=pointer]:
+          - /url: "#contact"
+      - button "Get a quote" [ref=f3e15] [cursor=pointer]
+  - main [ref=f3e19]:
+    - region [ref=f3e20]:
+      - generic [ref=f3e23]:
+        - heading "Take your event to the next level." [level=1] [ref=f3e24]: Take your eventto the next level.
+        - paragraph [ref=f3e25]: Gaming, entertainment, and interactive experiences for unforgettable events.
+        - generic [ref=f3e26]:
+          - button "Plan your event" [ref=f3e27] [cursor=pointer]
+          - link "Explore explanation" [ref=f3e31] [cursor=pointer]:
+            - /url: "#division"
+    - region [ref=f3e35]:
+      - paragraph [ref=f3e37]: Trusted collaborations
+      - generic [ref=f3e39]:
+        - img "Harvard University" [ref=f3e41]
+        - img "Fisher College" [ref=f3e43]
+        - img "Boston University" [ref=f3e45]
+        - img "New England College" [ref=f3e47]
+        - img "Brookdale Community College" [ref=f3e49]
+        - img "Connecticut College" [ref=f3e51]
+        - img "Framingham State University" [ref=f3e53]
+        - img "Emmanuel College" [ref=f3e55]
+    - region [ref=f3e64]:
+      - generic [ref=f3e65]:
+        - heading "Choose your experience" [level=2] [ref=f3e66]
+        - generic "Event experiences" [ref=f3e67]:
+          - button "Show Outdoor movie night" [ref=f3e68] [cursor=pointer]
+          - button "Show Gaming event" [ref=f3e71]:
+            - img "Guests playing multiplayer games on large screens at a Next Level Gaming event" [ref=f3e72]
+            - generic [ref=f3e74]:
+              - strong [ref=f3e75]: Gaming event
+              - generic [ref=f3e76]: Full-scale multiplayer setups, consoles and giant screens for any crowd.
+          - button "Show Esports tournament" [ref=f3e77] [cursor=pointer]
+    - region [ref=f3e80]:
+      - generic [ref=f3e82]:
+        - paragraph [ref=f3e83]: The gaming division
+        - heading "Level up the experience." [level=2] [ref=f3e85]: Level up theexperience.
+        - paragraph [ref=f3e86]: From multiplayer gaming to full-scale esports tournaments, we bring the screens, sound, lighting, and event crew to make every gathering feel like an occasion.
+        - link "Explore gaming events" [ref=f3e87] [cursor=pointer]:
+          - /url: "#experiences"
+    - region [ref=f3e90]:
+      - generic [ref=f3e91]:
+        - heading "What our clients say." [level=2] [ref=f3e92]
+        - paragraph [ref=f3e93]: Feedback from event organizers who trusted us with their crowd.
+      - generic [ref=f3e95]:
+        - generic [ref=f3e96]:
+          - article [ref=f3e97]:
+            - generic "5 out of 5 stars" [ref=f3e98]
+            - blockquote [ref=f3e109]: “Our students were completely engaged from the first game to the last. The crew made the whole night easy.”
+            - generic [ref=f3e110]: — Campus event organizer
+          - article [ref=f3e111]:
+            - generic "5 out of 5 stars" [ref=f3e112]
+            - blockquote [ref=f3e123]: “The setup looked incredible, and the team kept everything running smoothly all evening.”
+            - generic [ref=f3e124]: — Community event planner
+          - article [ref=f3e125]:
+            - generic "5 out of 5 stars" [ref=f3e126]
+            - blockquote [ref=f3e137]: “They brought the energy and equipment that made this an event people still talk about.”
+            - generic [ref=f3e138]: — Event coordinator
+          - article [ref=f3e139]:
+            - generic "5 out of 5 stars" [ref=f3e140]
+            - blockquote [ref=f3e151]: “Professional, responsive, and great with our guests. We’re already planning the next one.”
+            - generic [ref=f3e152]: — Organization host
+        - generic [aria-hidden] [ref=f3e153]:
+          - article [ref=f3e154]:
+            - blockquote [ref=f3e166]: “Our students were completely engaged from the first game to the last. The crew made the whole night easy.”
+            - generic [ref=f3e167]: — Campus event organizer
+          - article [ref=f3e168]:
+            - blockquote [ref=f3e180]: “The setup looked incredible, and the team kept everything running smoothly all evening.”
+            - generic [ref=f3e181]: — Community event planner
+          - article [ref=f3e182]:
+            - blockquote [ref=f3e194]: “They brought the energy and equipment that made this an event people still talk about.”
+            - generic [ref=f3e195]: — Event coordinator
+          - article [ref=f3e196]:
+            - blockquote [ref=f3e208]: “Professional, responsive, and great with our guests. We’re already planning the next one.”
+            - generic [ref=f3e209]: — Organization host
+      - generic [ref=f3e211]:
+        - generic [ref=f3e212]:
+          - article [ref=f3e213]:
+            - generic "5 out of 5 stars" [ref=f3e214]
+            - blockquote [ref=f3e225]: “Our students were completely engaged from the first game to the last. The crew made the whole night easy.”
+            - generic [ref=f3e226]: — Campus event organizer
+          - article [ref=f3e227]:
+            - generic "5 out of 5 stars" [ref=f3e228]
+            - blockquote [ref=f3e239]: “The setup looked incredible, and the team kept everything running smoothly all evening.”
+            - generic [ref=f3e240]: — Community event planner
+          - article [ref=f3e241]:
+            - generic "5 out of 5 stars" [ref=f3e242]
+            - blockquote [ref=f3e253]: “They brought the energy and equipment that made this an event people still talk about.”
+            - generic [ref=f3e254]: — Event coordinator
+          - article [ref=f3e255]:
+            - generic "5 out of 5 stars" [ref=f3e256]
+            - blockquote [ref=f3e267]: “Professional, responsive, and great with our guests. We’re already planning the next one.”
+            - generic [ref=f3e268]: — Organization host
+        - generic [aria-hidden] [ref=f3e269]:
+          - article [ref=f3e270]:
+            - blockquote [ref=f3e282]: “Our students were completely engaged from the first game to the last. The crew made the whole night easy.”
+            - generic [ref=f3e283]: — Campus event organizer
+          - article [ref=f3e284]:
+            - blockquote [ref=f3e296]: “The setup looked incredible, and the team kept everything running smoothly all evening.”
+            - generic [ref=f3e297]: — Community event planner
+          - article [ref=f3e298]:
+            - blockquote [ref=f3e310]: “They brought the energy and equipment that made this an event people still talk about.”
+            - generic [ref=f3e311]: — Event coordinator
+          - article [ref=f3e312]:
+            - blockquote [ref=f3e324]: “Professional, responsive, and great with our guests. We’re already planning the next one.”
+            - generic [ref=f3e325]: — Organization host
+    - generic [ref=f3e328]:
+      - paragraph [ref=f3e329]: Who we are
+      - heading "More than gaming. It’s an experience." [level=2] [ref=f3e330]: More than gaming.It’s an experience.
+      - paragraph [ref=f3e331]: For over a decade, we’ve turned get-togethers into shared stories—from giant outdoor screens to esports stages. Every event is planned, staffed, and run by our own crew.
+      - link "Learn more" [ref=f3e332] [cursor=pointer]:
+        - /url: https://www.nextlevelgamingevents.com/
+    - region [ref=f3e335]:
+      - generic [ref=f3e337]:
+        - heading "Ready to level up your event?" [level=2] [ref=f3e338]: Ready to level upyour event?
+        - button "Build your event" [ref=f3e339] [cursor=pointer]
+  - contentinfo [ref=f3e343]:
+    - generic [ref=f3e344]:
+      - generic [ref=f3e345]:
+        - generic [ref=f3e346]:
+          - link "Next Level Gaming Events, home" [ref=f3e347] [cursor=pointer]:
+            - /url: "#home"
+            - img "Next Level Gaming and Novelties" [ref=f3e348]
+          - paragraph [ref=f3e349]: Ready to level up your event?
+          - link "sales@nextlevelgamingevents.com" [ref=f3e350] [cursor=pointer]:
+            - /url: mailto:sales@nextlevelgamingevents.com
+          - generic [ref=f3e353]:
+            - button "Get a quote" [ref=f3e354] [cursor=pointer]
+            - generic [ref=f3e358]: Let’s make it a night to remember
+        - generic [ref=f3e360]:
+          - generic [ref=f3e361]:
+            - paragraph [ref=f3e362]: Events
+            - link "Gaming events" [ref=f3e363] [cursor=pointer]:
+              - /url: "#division"
+            - link "Movie nights" [ref=f3e364] [cursor=pointer]:
+              - /url: "#experiences"
+            - link "Trivia nights" [ref=f3e365] [cursor=pointer]:
+              - /url: "#experiences"
+          - generic [ref=f3e366]:
+            - paragraph [ref=f3e367]: Experience
+            - link "360 booth" [ref=f3e368] [cursor=pointer]:
+              - /url: "#experiences"
+            - link "Virtual reality" [ref=f3e369] [cursor=pointer]:
+              - /url: "#experiences"
+            - link "Just dance" [ref=f3e370] [cursor=pointer]:
+              - /url: "#experiences"
+            - link "Silent disco" [ref=f3e371] [cursor=pointer]:
+              - /url: "#experiences"
+            - link "Sim racing" [ref=f3e372] [cursor=pointer]:
+              - /url: "#experiences"
+          - generic [ref=f3e373]:
+            - paragraph [ref=f3e374]: Company
+            - link "About" [ref=f3e375] [cursor=pointer]:
+              - /url: "#about"
+            - link "Novelties" [ref=f3e376] [cursor=pointer]:
+              - /url: https://www.nextlevelgamingevents.com/art
+            - link "FAQ" [ref=f3e377] [cursor=pointer]:
+              - /url: "#contact"
+            - link "Contact" [ref=f3e378] [cursor=pointer]:
+              - /url: mailto:sales@nextlevelgamingevents.com
+      - generic "Next Level" [ref=f3e379]: NEXTLEVEL
+      - generic [ref=f3e380]:
+        - generic [ref=f3e381]: ///
+        - generic [ref=f3e382]: Next Level Gaming Events
+        - generic [ref=f3e384]: © 2026 Next Level Gaming Events
