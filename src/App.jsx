@@ -54,8 +54,8 @@ const experiences = [
 
 const testimonials = [
   'Amazing experience from setup to the event itself. Everything felt professional and engaging.',
-  'The whole room got involved. The screens, games, and crew made it a night to remember.',
-  'A brilliant addition to our event. Easy to plan, great energy, and something for everyone.',
+  'Amazing experience from setup to the event itself. Everything felt professional and engaging.',
+  'Amazing experience from setup to the event itself. Everything felt professional and engaging.',
 ];
 
 function useReveal() {
@@ -142,7 +142,7 @@ function Header({ onQuote }) {
         <nav className={`primary-nav${menuOpen ? ' primary-nav--open' : ''}`} aria-label="Main navigation">
           <a href="#experiences" onClick={closeMenu}>Events</a>
           <a href="#experiences" onClick={closeMenu}>Experiences</a>
-          <a href="#novelties" onClick={closeMenu}>Novelties</a>
+          <a href="https://www.nextlevelgamingevents.com/art" target="_blank" rel="noreferrer" onClick={closeMenu}>Novelties</a>
           <a href="#about" onClick={closeMenu}>About</a>
           <a href="#contact" onClick={closeMenu}>Contact</a>
         </nav>
@@ -261,7 +261,7 @@ function ExperienceSection() {
           <h2 className="section-title" id="experiences-title">Choose your<br className="mobile-break" /> <span>experience.</span></h2>
           <p className="section-intro">Bring the room together with the kind of event people talk about on the way home.</p>
         </div>
-        <div className="experience-stage" data-reveal>
+        <div className="experience-stage" data-reveal id="experience-panel" role="tabpanel" aria-label={`${experience.title} details`}>
           <div className="experience-image-wrap">
             <img key={experience.image} className="experience-image" src={experience.image} alt={experience.imageAlt} />
             <div className="image-shade" />
@@ -301,6 +301,7 @@ function ExperienceSection() {
               type="button"
               role="tab"
               aria-selected={active === index}
+              aria-controls="experience-panel"
               className={`experience-tab${active === index ? ' experience-tab--active' : ''}`}
               onClick={() => setIndex(index)}
             >
@@ -315,7 +316,7 @@ function ExperienceSection() {
 
 function DivisionSection() {
   return (
-    <section className="division section-pad" id="novelties" aria-labelledby="division-title">
+    <section className="division section-pad" id="gaming" aria-labelledby="division-title">
       <div className="wrap division-grid">
         <FadeContent blur={false} duration={0.8} delay={0.08}>
           <div className="division-image-frame">
@@ -418,7 +419,7 @@ function Footer({ onQuote }) {
           </div>
           <div className="footer-navs">
             <div><p>Events</p><a href="#experiences">Gaming events</a><a href="#experiences">Esports</a><a href="#experiences">Movie nights</a></div>
-            <div><p>Experiences</p><a href="#experiences">Virtual reality</a><a href="#experiences">Social games</a><a href="#novelties">Novelties</a></div>
+            <div><p>Experiences</p><a href="#experiences">Virtual reality</a><a href="#experiences">Social games</a><a href="https://www.nextlevelgamingevents.com/art" target="_blank" rel="noreferrer">Novelties</a></div>
             <div><p>Company</p><a href="#about">About</a><a href="https://www.nextlevelgamingevents.com/" target="_blank" rel="noreferrer">Our story</a><a href="mailto:sales@nextlevelgamingevents.com">Contact</a></div>
           </div>
         </div>
